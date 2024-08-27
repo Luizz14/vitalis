@@ -1,16 +1,28 @@
-import { icons } from 'lucide-react-native'
+import { LucideIcon } from 'lucide-react-native'
 import { styled } from 'nativewind'
+import { ReactNode } from 'react'
 
 interface IconProps {
-  name: string
-  color?: string
+  icon: LucideIcon
   size?: number
+  strokeWidth?: number
+  className?: string
+  color?: string
 }
 
-// const IconStyled = styled
-
-export function Icon({ name, color, size }: IconProps) {
-  const LucideIcon = icons[name]
-
-  return <LucideIcon color={color} size={size} />
+export function Icon({
+  icon: Icon,
+  className = 'text-neutral-500',
+  size = 24,
+  strokeWidth = 2,
+  color,
+}: IconProps) {
+  return (
+    <Icon
+      strokeWidth={strokeWidth}
+      size={size}
+      className={className}
+      color={color}
+    />
+  )
 }

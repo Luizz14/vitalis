@@ -38,7 +38,7 @@ const textStyles = tv({
       subtitle: ['font-bold text-blue-500 dark:text-blue-500'],
       body: ['font-semibold text-neutral-500 dark:text-neutral-300'],
       paragraph: ['font-normal text-neutral-600 dark:text-neutral-300'],
-      link: ['font-normal '],
+      link: ['font-normal text-blue-500 dark:text-blue-400'],
       defaultSemiBold: ['font-semibold'],
     },
   },

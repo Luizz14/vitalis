@@ -10,8 +10,8 @@ import { useEffect } from 'react'
 import 'react-native-reanimated'
 
 import { useColorScheme } from '@/hooks/useColorScheme'
+import { View } from 'react-native'
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
@@ -32,10 +32,15 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-        <Stack.Screen name='+not-found' />
-      </Stack>
+      <View className='flex-1 bg-neutral-50 dark:bg-neutral-900'>
+        <Stack
+          screenOptions={{ headerShown: false }}
+          initialRouteName='OnBoarding'
+        >
+          <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+          <Stack.Screen name='+not-found' />
+        </Stack>
+      </View>
     </ThemeProvider>
   )
 }
