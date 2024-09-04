@@ -6,14 +6,21 @@ import { Colors } from '@/constants/Colors'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import { CustomTabBar } from '@/components/TabBar'
 import { Icon } from '@/components/Icon'
-import { Home, UserCircle } from 'lucide-react-native'
-import { View } from 'react-native'
+import { Bell, Home, UserCircle } from 'lucide-react-native'
+import { Image, View } from 'react-native'
+import { BlurView } from 'expo-blur'
+import { Text } from '@/components/Text'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { Header } from '@/components/Header'
 
 export default function TabLayout() {
   const colorScheme = useColorScheme()
+  const insets = useSafeAreaInsets()
 
   return (
     <View className='flex-1 bg-neutral-50 dark:bg-neutral-900'>
+      <Header />
+
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
@@ -30,10 +37,21 @@ export default function TabLayout() {
             ),
           }}
         />
+
         <Tabs.Screen
-          name='explore'
+          name='notifications'
           options={{
-            title: 'Explore',
+            title: 'Alertas',
+            tabBarIcon: ({ color, focused }) => (
+              <Icon icon={Bell} color={color} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name='profile'
+          options={{
+            title: 'Perfil',
             tabBarIcon: ({ color, focused }) => (
               <Icon icon={UserCircle} color={color} />
             ),

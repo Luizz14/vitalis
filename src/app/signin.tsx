@@ -1,7 +1,8 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Text } from '@/components/Text'
-import { Link } from 'expo-router'
+import { useUserStore } from '@/stores/user-store'
+import { Link, Redirect } from 'expo-router'
 import { AtSign, LockKeyhole } from 'lucide-react-native'
 import { MotiView } from 'moti'
 import { TouchableOpacity, View } from 'react-native'
@@ -44,7 +45,7 @@ export default function SignIn() {
         </View>
 
         <View className='py-4'>
-          <Link asChild href={'/(tabs)/'}>
+          <Link asChild href={'/home/'}>
             <Button>
               <Text type='title' size='xl' className='text-neutral-50'>
                 Entrar

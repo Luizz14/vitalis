@@ -8,7 +8,7 @@ interface ButtonProps extends MotiPressableProps {
 }
 const MotiPressableStyled = styled(MotiPressable)
 
-export function Button({ children, ...props }: ButtonProps) {
+export const Button = ({ children, ...props }: ButtonProps) => {
   return (
     <MotiPressableStyled
       className='items-center rounded-3xl border-blue-600 bg-blue-500 px-4 py-3 dark:border-blue-700 dark:bg-blue-600'

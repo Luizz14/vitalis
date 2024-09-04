@@ -3,19 +3,7 @@ import {
   TextProps as TextPrimitiveProps,
 } from 'react-native'
 
-import { tv } from 'tailwind-variants'
-
-interface TextProps extends TextPrimitiveProps {
-  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
-  type?:
-    | 'headline'
-    | 'title'
-    | 'subtitle'
-    | 'body'
-    | 'link'
-    | 'defaultSemiBold'
-    | 'paragraph'
-}
+import { tv, VariantProps } from 'tailwind-variants'
 
 const textStyles = tv({
   base: 'text-neutral-800 dark:text-neutral-100',
@@ -40,9 +28,14 @@ const textStyles = tv({
       paragraph: ['font-normal text-neutral-600 dark:text-neutral-300'],
       link: ['font-normal text-blue-500 dark:text-blue-400'],
       defaultSemiBold: ['font-semibold'],
+      span: ['font-light text-neutral-500 dark:text-neutral-400'],
     },
   },
 })
+
+type TextVariants = VariantProps<typeof textStyles>
+
+interface TextProps extends TextVariants, TextPrimitiveProps {}
 
 export function Text({ size = 'base', type = 'body', ...props }: TextProps) {
   return <TextPrimitive className={textStyles({ size, type })} {...props} />

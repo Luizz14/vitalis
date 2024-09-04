@@ -5,9 +5,16 @@ import { Text } from '@/components/Text'
 import { Button } from '@/components/Button'
 import { MotiView } from 'moti'
 import { FadeInDown, FadeInUp } from 'react-native-reanimated'
-import { Link } from 'expo-router'
+import { Link, Redirect } from 'expo-router'
+import { useUserStore } from '@/stores/user-store'
 
 export default function OnBoarding() {
+  const { isSession } = useUserStore()
+
+  console.log('isSession', isSession)
+
+  if (isSession) return <Redirect href={'/(app)/home/'} />
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -37,7 +44,7 @@ export default function OnBoarding() {
           </Text>
         </View>
 
-        <Link href={'/(auth)/signin'} asChild>
+        <Link href={'/signin'} asChild>
           <Button>
             <Text type='title' size='xl' className='text-neutral-50'>
               Começar

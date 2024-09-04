@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet } from 'react-native'
+import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -25,10 +25,6 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({
 }) => {
   const tabWidth = state.routes.length > 4 ? 60 : 80
   const insets = useSafeAreaInsets()
-  const { colorScheme } = useColorScheme()
-
-  const borderInativeColor = colorScheme === 'dark' ? '#1e1e1e' : '#f6f6f6'
-  const borderActiveColor = colorScheme === 'dark' ? '#454545' : '#e7e7e7'
 
   const selectedIndex = useSharedValue(state.index)
 
@@ -42,14 +38,11 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({
   const paddingBottom = insets.bottom > 0 ? insets.bottom + 8 : 16
 
   return (
-    <Animated.View
-      layout={LinearTransition.springify(18)}
-      className={'flex-row rounded-2xl bg-gray-100 pt-4 dark:bg-neutral-700'}
-      style={[
-        {
-          paddingBottom,
-        },
-      ]}
+    <View
+      className={'flex-row rounded-2xl bg-gray-200 pt-4 dark:bg-neutral-700'}
+      style={{
+        paddingBottom,
+      }}
     >
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key]
@@ -61,13 +54,6 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({
           ],
         }))
 
-        const animatedLabelStyle = useAnimatedStyle(() => ({
-          opacity: withTiming(isFocused ? 1 : 0.5, { duration: 200 }),
-          // transform: [
-          //   { translateY: withTiming(isFocused ? 0 : 8, { duration: 200 }) },
-          // ],
-        }))
-
         return (
           <AnimatedTouchableOpacity
             key={index}
@@ -76,7 +62,7 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({
             onPress={() => handlePress(index)}
           >
             <Animated.View
-              className='flex-row items-center justify-center gap-2 overflow-hidden rounded-xl p-2 px-4'
+              className='items-center justify-center overflow-hidden rounded-xl px-4 pt-1'
               layout={LinearTransition.springify().damping(18)}
             >
               <Animated.View style={[styles.iconContainer, animatedIconStyle]}>
@@ -87,12 +73,12 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({
                 })}
               </Animated.View>
 
-              <Text>{options.tabBarLabel as string}</Text>
+              <Text size='sm'>{options.title}</Text>
             </Animated.View>
           </AnimatedTouchableOpacity>
         )
       })}
-    </Animated.View>
+    </View>
   )
 }
 

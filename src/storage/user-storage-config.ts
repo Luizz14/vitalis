@@ -1,0 +1,3 @@
+const USER_STORAGE_KEY = '@vitalis=USER_STORAGE_KEY'
+
+export { USER_STORAGE_KEY }
